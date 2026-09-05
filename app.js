@@ -1517,8 +1517,12 @@ const Auth = {
       return;
     }
 
+
+
     /*  REAL SUPABASE AUTH:
       =========================================================*/
+      const supabase = window.supabase.createClient(CONFIG.SUPABASE.url, CONFIG.SUPABASE.anonKey);
+
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
