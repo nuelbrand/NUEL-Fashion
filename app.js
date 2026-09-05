@@ -43,8 +43,8 @@ const CONFIG = {
 
   // Supabase configuration : replace with real credentials before deployment
   SUPABASE: {
-    url:    'YOUR_SUPABASE_URL',
-    anonKey: 'YOUR_SUPABASE_ANON_KEY',
+    url:    'https://qkfhiqmcczkxycshcodo.supabase.co',
+    anonKey: 'sb_publishable_8UxWlPs1uPAkdomCCuu8KQ_692RCEFo',
   },
 
   // Paystack configuration : replace with real public key
