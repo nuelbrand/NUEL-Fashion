@@ -1515,27 +1515,19 @@ const Auth = {
       return;
     }
 
-    /*
       REAL SUPABASE AUTH:
       =========================================================
-      import { createClient } from '@supabase/supabase-js'
-      const supabase = createClient(CONFIG.SUPABASE.url, CONFIG.SUPABASE.anonKey)
-      
+      const supabase = window.supabase.createClient(CONFIG.SUPABASE.url, CONFIG.SUPABASE.anonKey);
+     
       const { data, error } = await supabase.auth.signInWithPassword({ email, password })
       if (error) { Toast.show(error.message); return; }
       State.user = data.user;
       Toast.show('Welcome back, ' + data.user.email);
       Drawers.close('account');
       =========================================================
-    */
 
-    Toast.show('Auth: configure Supabase credentials to enable login');
-    console.log('SUPABASE LOGIN:', { email });
   },
 
-  /**
-   * Create a new account via Supabase Auth.
-   */
   async signup() {
     const name     = document.getElementById('signupName')?.value;
     const email    = document.getElementById('signupEmail')?.value;
@@ -1546,7 +1538,6 @@ const Auth = {
       return;
     }
 
-    /*
       REAL SUPABASE AUTH:
       =========================================================
       const { data, error } = await supabase.auth.signUp({
@@ -1558,10 +1549,7 @@ const Auth = {
       Toast.show('Account created! Check your email to verify.');
       Drawers.close('account');
       =========================================================
-    */
 
-    Toast.show('Signup: configure Supabase credentials to activate');
-    console.log('SUPABASE SIGNUP:', { name, email });
   },
 };
 
