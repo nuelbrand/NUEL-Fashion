@@ -1494,8 +1494,8 @@ const Auth = {
       return;
     }
 
-      REAL SUPABASE AUTH:
-      =========================================================
+    /*  REAL SUPABASE AUTH:
+      ========================================================= */
       const supabase = window.supabase.createClient(CONFIG.SUPABASE.url, CONFIG.SUPABASE.anonKey);
      
       const { data, error } = await supabase.auth.signInWithPassword({ email, password })
@@ -1503,7 +1503,7 @@ const Auth = {
       State.user = data.user;
       Toast.show('Welcome back, ' + data.user.email);
       Drawers.close('account');
-      =========================================================
+    /*  ========================================================= */
 
   },
 
@@ -1517,8 +1517,8 @@ const Auth = {
       return;
     }
 
-      REAL SUPABASE AUTH:
-      =========================================================
+    /*  REAL SUPABASE AUTH:
+      =========================================================*/
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
@@ -1527,7 +1527,7 @@ const Auth = {
       if (error) { Toast.show(error.message); return; }
       Toast.show('Account created! Check your email to verify.');
       Drawers.close('account');
-      =========================================================
+     /* =========================================================*/
 
   },
 };
