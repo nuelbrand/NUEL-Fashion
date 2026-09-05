@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="NUEL Fashion: What you wear is a declaration. Kingdom-first clothing, accessories, and lifestyle products rooted in faith and identity." />
+  <title>NUEL Fashion: What You Wear Is A Declaration</title>
+
+  <!-- Google Fonts: Playfair Display (Display) + Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Feather Icons -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.1/feather.min.js"></script>
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===================================================
+       OVERLAY BACKGROUNDS (shared across panels/modals)
+       =================================================== -->
+  <div id="overlay" class="overlay" aria-hidden="true"></div>
+
+  <!-- ===================================================
+       HEADER: Sticky navigation
+       =================================================== -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner container">
+
+      <!-- Logo -->
+      <a href="#home" class="logo" data-page="home">
+        <span class="logo-mark">N</span>
+        <div class="logo-text">
+          <span class="logo-brand">NUEL Fashion</span>
+          <span class="logo-sub">Soul Winner</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="#home"      class="nav-link active" data-page="home">Home</a>
+        <a href="#men"       class="nav-link"         data-page="men">Men</a>
+        <a href="#women"     class="nav-link"         data-page="women">Women</a>
+        <a href="#about"     class="nav-link"         data-page="about">About</a>
+        <a href="#community" class="nav-link"         data-page="community">Community</a>
+        <a href="#contact"   class="nav-link"         data-page="contact">Contact</a>
+      </nav>
+
+      <!-- Utility Icons -->
+      <div class="header-utils">
+
+        <!-- Currency Selector -->
+        <button class="util-btn currency-toggle" id="currencyToggle" aria-label="Toggle currency">
+          <span id="currencyLabel">NGN</span>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button class="util-btn theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+          <i data-feather="moon" class="icon-moon"></i>
+          <i data-feather="sun"  class="icon-sun"></i>
+        </button>
+
+        <!-- Search -->
+        <button class="util-btn" id="searchTrigger" aria-label="Search">
+          <i data-feather="search"></i>
+        </button>
+
+        <!-- Wishlist -->
+        <button class="util-btn wishlist-btn" id="wishlistTrigger" aria-label="Wishlist">
+          <i data-feather="heart"></i>
+          <span class="badge" id="wishlistCount" aria-live="polite">0</span>
+        </button>
+
+        <!-- Cart -->
+        <button class="util-btn cart-btn" id="cartTrigger" aria-label="Shopping cart">
+          <i data-feather="shopping-bag"></i>
+          <span class="badge" id="cartCount" aria-live="polite">0</span>
+        </button>
+
+        <!-- Account -->
+        <button class="util-btn" id="accountTrigger" aria-label="Account">
+          <i data-feather="user"></i>
+        </button>
+
+        <!-- Mobile Menu Hamburger -->
+        <button class="util-btn mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">
+          <i data-feather="menu"></i>
+        </button>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Drawer -->
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" aria-hidden="true">
+    <div class="mobile-nav-header">
+      <span class="logo-brand">NUEL Fashion</span>
+      <button class="util-btn" id="mobileNavClose" aria-label="Close menu">
+        <i data-feather="x"></i>
+      </button>
+    </div>
+    <a href="#home"      class="mobile-nav-link" data-page="home">Home</a>
+    <a href="#men"       class="mobile-nav-link" data-page="men">Men</a>
+    <a href="#women"     class="mobile-nav-link" data-page="women">Women</a>
+    <a href="#about"     class="mobile-nav-link" data-page="about">About</a>
+    <a href="#community" class="mobile-nav-link" data-page="community">Community</a>
+    <a href="#contact"   class="mobile-nav-link" data-page="contact">Contact</a>
+  </nav>
+
+  <!-- ===================================================
+       SEARCH OVERLAY
+       =================================================== -->
+  <div class="search-overlay" id="searchOverlay" aria-hidden="true" role="search">
+    <div class="search-box">
+      <input type="text" id="searchInput" class="search-input" placeholder="Search for tees, hoodies, faith..." autocomplete="off" aria-label="Search products" />
+      <button class="search-close" id="searchClose" aria-label="Close search">
+        <i data-feather="x"></i>
+      </button>
+    </div>
+    <div class="search-results" id="searchResults" aria-live="polite"></div>
+  </div>
+
+  <!-- ===================================================
+       CART DRAWER (slide-over)
+       =================================================== -->
+  <aside class="drawer cart-drawer" id="cartDrawer" aria-label="Shopping cart" aria-hidden="true">
+    <div class="drawer-header">
+      <h2 class="drawer-title">Your Cart</h2>
+      <button class="drawer-close" id="cartClose" aria-label="Close cart">
+        <i data-feather="x"></i>
+      </button>
+    </div>
+
+    <!-- Volume Discount Banner -->
+    <div class="volume-banner" id="volumeBanner">
+      <i data-feather="zap"></i>
+      <span id="volumeBannerText">Add 2+ items for 10% off each</span>
+    </div>
+
+    <div class="drawer-body" id="cartItems">
+      <div class="cart-empty" id="cartEmpty">
+        <i data-feather="shopping-bag"></i>
+        <p>Your cart is empty</p>
+        <button class="btn btn-primary" onclick="closeCart()">Continue Shopping</button>
+      </div>
+    </div>
+
+    <div class="drawer-footer" id="cartFooter" style="display:none">
+      <div class="cart-summary">
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span id="cartSubtotal">0</span>
+        </div>
+        <div class="summary-row discount-row" id="discountRow" style="display:none">
+          <span>Volume Discount</span>
+          <span id="discountAmount" class="discount-value"></span>
+        </div>
+        <div class="summary-row summary-total">
+          <span>Total</span>
+          <span id="cartTotal">0</span>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-full" id="checkoutBtn">
+        Proceed to Checkout
+        <i data-feather="arrow-right"></i>
+      </button>
+      <p class="secure-note"><i data-feather="lock"></i> Secured by Paystack</p>
+    </div>
+  </aside>
+
+  <!-- ===================================================
+       WISHLIST DRAWER (slide-over)
+       =================================================== -->
+  <aside class="drawer wishlist-drawer" id="wishlistDrawer" aria-label="Wishlist" aria-hidden="true">
+    <div class="drawer-header">
+      <h2 class="drawer-title">Saved Items</h2>
+      <button class="drawer-close" id="wishlistClose" aria-label="Close wishlist">
+        <i data-feather="x"></i>
+      </button>
+    </div>
+    <div class="drawer-body" id="wishlistItems">
+      <div class="cart-empty">
+        <i data-feather="heart"></i>
+        <p>No saved items yet</p>
+        <button class="btn btn-primary" onclick="closeWishlist()">Explore Collection</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ===================================================
+       ACCOUNT MODAL
+       =================================================== -->
+  <div class="modal" id="accountModal" aria-hidden="true" role="dialog" aria-labelledby="modalTitle">
+    <div class="modal-box">
+      <button class="modal-close" id="accountClose" aria-label="Close account modal">
+        <i data-feather="x"></i>
+      </button>
+
+      <!-- Tab Switcher -->
+      <div class="modal-tabs">
+        <button class="modal-tab active" data-tab="login">Sign In</button>
+        <button class="modal-tab"        data-tab="signup">Create Account</button>
+      </div>
+
+      <!-- Login Form -->
+      <div class="modal-panel active" id="loginPanel">
+        <h2 id="modalTitle" class="modal-heading">Welcome back</h2>
+        <p class="modal-sub">Sign in to your NUEL account</p>
+        <div class="form-group">
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" class="form-input" placeholder="you@example.com" />
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" class="form-input" placeholder="Your password" />
+        </div>
+        <button class="btn btn-primary btn-full" id="loginBtn">Sign In</button>
+        <p class="form-link"><a href="#">Forgot password?</a></p>
+      </div>
+
+      <!-- Signup Form -->
+      <div class="modal-panel" id="signupPanel">
+        <h2 class="modal-heading">Join the movement</h2>
+        <p class="modal-sub">Create your NUEL Fashion account</p>
+        <div class="form-group">
+          <label for="signupName">Full Name</label>
+          <input type="text" id="signupName" class="form-input" placeholder="Your name" />
+        </div>
+        <div class="form-group">
+          <label for="signupEmail">Email</label>
+          <input type="email" id="signupEmail" class="form-input" placeholder="you@example.com" />
+        </div>
+        <div class="form-group">
+          <label for="signupPassword">Password</label>
+          <input type="password" id="signupPassword" class="form-input" placeholder="Create a password" />
+        </div>
+        <button class="btn btn-primary btn-full" id="signupBtn">Create Account</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===================================================
+       QUICK VIEW MODAL (product detail)
+       =================================================== -->
+  <div class="modal modal-wide" id="quickViewModal" aria-hidden="true" role="dialog">
+    <div class="modal-box modal-box-wide">
+      <button class="modal-close" id="quickViewClose" aria-label="Close quick view">
+        <i data-feather="x"></i>
+      </button>
+      <div class="quickview-inner" id="quickViewContent">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================
+       TOAST NOTIFICATION
+       =================================================== -->
+  <div class="toast" id="toast" aria-live="assertive" role="alert"></div>
+
+  <!-- ===================================================
+       MAIN CONTENT: all "pages" live here, toggled by JS
+       =================================================== -->
+  <main id="mainContent">
+
+    <!-- =============================================
+         PAGE: HOME
+         ============================================= -->
+    <section class="page active" id="page-home">
+
+      <!-- Hero -->
+      <div class="hero">
+        <div class="hero-bg-pattern"></div>
+        <div class="container hero-inner">
+          <div class="hero-copy">
+            <p class="hero-eyebrow">Kingdom Culture. Every Day.</p>
+            <h1 class="hero-headline">
+              What you wear<br />
+              <em>is a declaration.</em>
+            </h1>
+            <p class="hero-body">
+              NUEL Fashion turns everyday style into a kingdom statement.
+              Faith made visible, wearable, and irresistibly beautiful.
+            </p>
+            <div class="hero-actions">
+              <button class="btn btn-primary btn-lg" data-page="men" onclick="navigateTo('men')">Shop Men</button>
+              <button class="btn btn-outline btn-lg" data-page="women" onclick="navigateTo('women')">Shop Women</button>
+            </div>
+            <div class="hero-trust">
+              <span><i data-feather="check-circle"></i> Faith-forward design</span>
+              <span><i data-feather="check-circle"></i> Premium quality</span>
+              <span><i data-feather="check-circle"></i> Kingdom message</span>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <div class="hero-image-frame">
+              <div class="hero-badge hero-badge-1">
+                <span class="badge-label">Drop 01</span>
+                <span class="badge-name">Foundation</span>
+              </div>
+              <div class="hero-image-placeholder">
+                <!-- SVG Illustration representing clothing/faith -->
+                <svg viewBox="0 0 340 420" fill="none" xmlns="http://www.w3.org/2000/svg" class="hero-svg">
+                  <rect width="340" height="420" rx="16" fill="var(--blue-covenant)" opacity="0.08"/>
+                  <path d="M120 80 L170 60 L220 80 L240 130 L200 130 L200 340 L140 340 L140 130 L100 130 Z" fill="var(--blue-covenant)" opacity="0.6"/>
+                  <path d="M100 130 L60 160 L80 200 L120 175 L120 130 Z" fill="var(--blue-holiness)" opacity="0.5"/>
+                  <path d="M240 130 L280 160 L260 200 L220 175 L220 130 Z" fill="var(--blue-holiness)" opacity="0.5"/>
+                  <text x="170" y="230" text-anchor="middle" font-family="Playfair Display, serif" font-size="13" fill="var(--blue-deep)" opacity="0.9">Rooted in Love</text>
+                  <text x="170" y="250" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="var(--blue-covenant)" opacity="0.7" letter-spacing="2">NUEL FASHION</text>
+                  <!-- Cross detail -->
+                  <line x1="165" y1="180" x2="175" y2="180" stroke="var(--blue-deep)" stroke-width="2" opacity="0.4"/>
+                  <line x1="170" y1="175" x2="170" y2="185" stroke="var(--blue-deep)" stroke-width="2" opacity="0.4"/>
+                </svg>
+              </div>
+              <div class="hero-badge hero-badge-2">
+                <span>₦15K from</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Scroll cue -->
+        <div class="hero-scroll-cue">
+          <i data-feather="chevron-down"></i>
+        </div>
+      </div>
+
+      <!-- Volume Pricing Bar -->
+      <div class="volume-pricing-bar">
+        <div class="container volume-pricing-inner">
+          <p class="volume-label">Volume Savings</p>
+          <div class="volume-tiers">
+            <div class="tier-item">
+              <span class="tier-qty">Buy 1</span>
+              <span class="tier-desc">Full price</span>
+            </div>
+            <div class="tier-divider"></div>
+            <div class="tier-item tier-active">
+              <span class="tier-qty">Buy 2-3</span>
+              <span class="tier-desc">10% off each</span>
+            </div>
+            <div class="tier-divider"></div>
+            <div class="tier-item tier-best">
+              <span class="tier-qty">Buy 4+</span>
+              <span class="tier-desc">20% off each</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sales Section 1: Identity Objection Breaker -->
+      <section class="sales-section identity-section">
+        <div class="container">
+          <div class="section-split">
+            <div class="split-copy">
+              <h2 class="section-heading">You were made to stand out.</h2>
+              <p class="section-body">
+                Most people wear clothes. NUEL customers wear convictions.
+                Every thread, every print, every colourway carries the weight
+                of who you are in the kingdom. This is not fashion. This is identity.
+              </p>
+              <p class="section-body">
+                Whether you are stepping into a boardroom, a church hall,
+                or a Saturday market, you carry the message without saying a word.
+              </p>
+              <blockquote class="brand-quote">
+                "What you wear is a declaration. Make it count."
+              </blockquote>
+            </div>
+            <div class="split-visual">
+              <div class="identity-grid">
+                <div class="identity-card">
+                  <div class="identity-icon">
+                    <i data-feather="feather"></i>
+                  </div>
+                  <h3>Gentleness</h3>
+                  <p>Designs that speak with quiet confidence, never aggression.</p>
+                </div>
+                <div class="identity-card">
+                  <div class="identity-icon">
+                    <i data-feather="heart"></i>
+                  </div>
+                  <h3>Love</h3>
+                  <p>Every piece is crafted with care for the person who wears it.</p>
+                </div>
+                <div class="identity-card">
+                  <div class="identity-icon">
+                    <i data-feather="sun"></i>
+                  </div>
+                  <h3>Joy</h3>
+                  <p>Colour and form that make you feel as good as you look.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Collections -->
+      <section class="collections-section">
+        <div class="container">
+          <div class="section-header">
+            <h2 class="section-heading">Featured Collection</h2>
+            <p class="section-sub">Drop 01: Foundation</p>
+          </div>
+          <div class="product-grid" id="featuredProducts">
+            <!-- Products injected by JS -->
+          </div>
+          <div class="section-cta">
+            <button class="btn btn-outline" onclick="navigateTo('men')">View Men's Collection</button>
+            <button class="btn btn-outline" onclick="navigateTo('women')">View Women's Collection</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sales Section 2: Quality Objection -->
+      <section class="sales-section quality-section">
+        <div class="container">
+          <div class="quality-header">
+            <h2 class="section-heading centered">Built to last. Priced to reach.</h2>
+            <p class="section-body centered">
+              Premium 100% cotton. Reinforced stitching. Pre-shrunk fabric.
+              NUEL Fashion refuses to compromise quality for the sake of affordability,
+              and refuses to compromise affordability for the sake of looking premium.
+            </p>
+          </div>
+          <div class="quality-pillars">
+            <div class="pillar">
+              <span class="pillar-num">100%</span>
+              <span class="pillar-label">Cotton fabric</span>
+            </div>
+            <div class="pillar">
+              <span class="pillar-num">45-55%</span>
+              <span class="pillar-label">Gross margins</span>
+            </div>
+            <div class="pillar">
+              <span class="pillar-num">4x</span>
+              <span class="pillar-label">Drops per year</span>
+            </div>
+            <div class="pillar">
+              <span class="pillar-num">500+</span>
+              <span class="pillar-label">Units sold target</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Seasonal Drop Countdown -->
+      <section class="drop-section">
+        <div class="container">
+          <div class="drop-inner">
+            <div class="drop-copy">
+              <p class="drop-eyebrow">Coming Next</p>
+              <h2 class="drop-title">Drop 02: Peace</h2>
+              <p class="drop-desc">
+                Spring and summer co-ord sets, modest dress pieces,
+                and the NUEL devotional journal bundle. Peace, rest, and beauty
+                arriving in Q2.
+              </p>
+              <button class="btn btn-primary" id="waitlistBtn">Join the Waitlist</button>
+            </div>
+            <div class="drop-visual">
+              <div class="drop-theme-card">
+                <div class="drop-theme-name">Peace &amp; Rest</div>
+                <div class="drop-theme-products">
+                  <span>Co-ord Sets</span>
+                  <span>Dress Pieces</span>
+                  <span>Journal Bundle</span>
+                  <span>Cap/Beanies</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sales Section 3: Price Objection + Social Proof -->
+      <section class="sales-section proof-section">
+        <div class="container">
+          <h2 class="section-heading centered">The kingdom wears NUEL.</h2>
+          <p class="section-body centered">
+            Real people, real declarations, real community.
+          </p>
+          <div class="testimonials-grid">
+            <div class="testimonial-card">
+              <div class="testimonial-avatar">A</div>
+              <p class="testimonial-text">
+                "I wore the Rooted in Love tee to my campus fellowship and three people asked where I got it.
+                That conversation led to a discipleship series. This is what kingdom fashion does."
+              </p>
+              <p class="testimonial-author">Adaeze, Lagos</p>
+            </div>
+            <div class="testimonial-card">
+              <div class="testimonial-avatar">E</div>
+              <p class="testimonial-text">
+                "The hoodie quality is genuinely premium. I have bought things at triple the price that felt cheaper.
+                NUEL gets the balance right."
+              </p>
+              <p class="testimonial-author">Emmanuel, Abuja</p>
+            </div>
+            <div class="testimonial-card">
+              <div class="testimonial-avatar">F</div>
+              <p class="testimonial-text">
+                "Bought the tote bag as a gift for my sister and she immediately wanted the full tee as well.
+                The packaging alone made her cry. So intentional."
+              </p>
+              <p class="testimonial-author">Funmi, Port Harcourt</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sales Section 4: Lifestyle + Gift Sets -->
+      <section class="sales-section gift-section">
+        <div class="container">
+          <div class="section-split reverse">
+            <div class="split-copy">
+              <h2 class="section-heading">The gift that carries a message.</h2>
+              <p class="section-body">
+                Every milestone deserves a meaningful gift. NUEL Fashion gift sets
+                are curated for birthdays, graduations, and faith milestones.
+                Gift-wrapped, branded, and accompanied by a personalised card.
+              </p>
+              <ul class="gift-list">
+                <li><i data-feather="gift"></i> Faith Milestone Bundle: Journal, mug, tote</li>
+                <li><i data-feather="gift"></i> Kingdom Starter Pack: Tee, tote, wristband</li>
+                <li><i data-feather="gift"></i> Grad Gift Set: Hoodie, journal, wristband set</li>
+              </ul>
+              <button class="btn btn-primary" onclick="navigateTo('women')">Shop Gift Sets</button>
+            </div>
+            <div class="split-visual">
+              <div class="gift-visual-card">
+                <div class="gift-badge">Perfect Gift</div>
+                <div class="gift-items">
+                  <div class="gift-item">Journal</div>
+                  <div class="gift-item">Mug</div>
+                  <div class="gift-item">Tote</div>
+                </div>
+                <p class="gift-price-display" id="giftPriceDisplay">From <strong>₦28,000</strong></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sales Section 5: Final CTA + Scarcity -->
+      <section class="sales-section final-cta-section">
+        <div class="container">
+          <div class="final-cta-inner">
+            <h2 class="final-cta-heading">Drop 01 is live. Limited units available.</h2>
+            <p class="final-cta-sub">
+              NUEL Fashion operates on a drop model. When stock is gone, it is gone.
+              Foundation Drop pieces will not return. This is your moment.
+            </p>
+            <div class="final-cta-actions">
+              <button class="btn btn-primary btn-lg" onclick="navigateTo('men')">Shop Men Now</button>
+              <button class="btn btn-primary btn-lg" onclick="navigateTo('women')">Shop Women Now</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Newsletter Strip -->
+      <section class="newsletter-section">
+        <div class="container">
+          <div class="newsletter-inner">
+            <div class="newsletter-copy">
+              <h3>Stay in the kingdom loop.</h3>
+              <p>Early access to drops, members-only discounts, and kingdom content.</p>
+            </div>
+            <form class="newsletter-form" id="newsletterForm" onsubmit="handleNewsletter(event)">
+              <input type="email" class="form-input newsletter-input" placeholder="Your email address" required aria-label="Email for newsletter" />
+              <button type="submit" class="btn btn-primary">Join</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+    </section>
+    <!-- END PAGE: HOME -->
+
+
+    <!-- =============================================
+         PAGE: MEN
+         ============================================= -->
+    <section class="page" id="page-men">
+      <div class="page-hero page-hero-sm">
+        <div class="container">
+          <h1 class="page-title">Men's Collection</h1>
+          <p class="page-subtitle">Kingdom style, every day. Drop 01: Foundation.</p>
+        </div>
+      </div>
+
+      <div class="container shop-layout">
+        <!-- Filters Sidebar -->
+        <aside class="filter-sidebar" id="menFilters">
+          <div class="filter-group">
+            <h3 class="filter-title">Category</h3>
+            <label class="filter-option"><input type="checkbox" value="tee" data-filter="category" checked /> Tees</label>
+            <label class="filter-option"><input type="checkbox" value="hoodie" data-filter="category" checked /> Hoodies</label>
+            <label class="filter-option"><input type="checkbox" value="co-ord" data-filter="category" checked /> Co-ord Sets</label>
+            <label class="filter-option"><input type="checkbox" value="accessory" data-filter="category" checked /> Accessories</label>
+          </div>
+          <div class="filter-group">
+            <h3 class="filter-title">Size</h3>
+            <div class="size-chips" id="menSizeFilter">
+              <button class="size-chip active" data-size="all">All</button>
+              <button class="size-chip" data-size="XS">XS</button>
+              <button class="size-chip" data-size="S">S</button>
+              <button class="size-chip" data-size="M">M</button>
+              <button class="size-chip" data-size="L">L</button>
+              <button class="size-chip" data-size="XL">XL</button>
+              <button class="size-chip" data-size="XXL">XXL</button>
+            </div>
+          </div>
+          <div class="filter-group">
+            <h3 class="filter-title">Price Range</h3>
+            <div class="price-range">
+              <input type="range" id="menPriceRange" min="0" max="80000" value="80000" step="1000" class="range-slider" />
+              <div class="price-range-labels">
+                <span>₦0</span>
+                <span id="menPriceLabel">Up to ₦80,000</span>
+              </div>
+            </div>
+          </div>
+          <div class="filter-group">
+            <h3 class="filter-title">Colour</h3>
+            <div class="colour-chips" id="menColorFilter">
+              <button class="colour-chip active" data-colour="all" style="background: var(--text-primary);" title="All colours"></button>
+              <button class="colour-chip" data-colour="deep-heaven"   style="background: #042C53;" title="Deep Heaven"></button>
+              <button class="colour-chip" data-colour="covenant"      style="background: #185FA5;" title="Covenant Blue"></button>
+              <button class="colour-chip" data-colour="holiness"      style="background: #378ADD;" title="Holiness"></button>
+              <button class="colour-chip" data-colour="grace-light"   style="background: #B5D4F4;" title="Grace Light"></button>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Product Grid -->
+        <div class="shop-main">
+          <div class="shop-toolbar">
+            <p class="results-count" id="menResultsCount">Showing all products</p>
+            <button class="btn btn-ghost filter-toggle-btn" id="filterToggleBtn">
+              <i data-feather="sliders"></i> Filters
+            </button>
+          </div>
+          <div class="product-grid" id="menProducts">
+            <!-- Injected by JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- END PAGE: MEN -->
+
+
+    <!-- =============================================
+         PAGE: WOMEN
+         ============================================= -->
+    <section class="page" id="page-women">
+      <div class="page-hero page-hero-sm">
+        <div class="container">
+          <h1 class="page-title">Women's Collection</h1>
+          <p class="page-subtitle">Beautiful. Intentional. Kingdom.</p>
+        </div>
+      </div>
+
+      <div class="container shop-layout">
+        <aside class="filter-sidebar" id="womenFilters">
+          <div class="filter-group">
+            <h3 class="filter-title">Category</h3>
+            <label class="filter-option"><input type="checkbox" value="dress" data-filter="category" checked /> Dress Pieces</label>
+            <label class="filter-option"><input type="checkbox" value="tee" data-filter="category" checked /> Tees</label>
+            <label class="filter-option"><input type="checkbox" value="co-ord" data-filter="category" checked /> Co-ord Sets</label>
+            <label class="filter-option"><input type="checkbox" value="accessory" data-filter="category" checked /> Accessories</label>
+            <label class="filter-option"><input type="checkbox" value="gift" data-filter="category" checked /> Gift Sets</label>
+          </div>
+          <div class="filter-group">
+            <h3 class="filter-title">Size</h3>
+            <div class="size-chips" id="womenSizeFilter">
+              <button class="size-chip active" data-size="all">All</button>
+              <button class="size-chip" data-size="XS">XS</button>
+              <button class="size-chip" data-size="S">S</button>
+              <button class="size-chip" data-size="M">M</button>
+              <button class="size-chip" data-size="L">L</button>
+              <button class="size-chip" data-size="XL">XL</button>
+            </div>
+          </div>
+          <div class="filter-group">
+            <h3 class="filter-title">Price Range</h3>
+            <div class="price-range">
+              <input type="range" id="womenPriceRange" min="0" max="80000" value="80000" step="1000" class="range-slider" />
+              <div class="price-range-labels">
+                <span>₦0</span>
+                <span id="womenPriceLabel">Up to ₦80,000</span>
+              </div>
+            </div>
+          </div>
+          <div class="filter-group">
+            <h3 class="filter-title">Colour</h3>
+            <div class="colour-chips" id="womenColorFilter">
+              <button class="colour-chip active" data-colour="all" style="background: var(--text-primary);" title="All colours"></button>
+              <button class="colour-chip" data-colour="deep-heaven" style="background: #042C53;" title="Deep Heaven"></button>
+              <button class="colour-chip" data-colour="covenant"    style="background: #185FA5;" title="Covenant Blue"></button>
+              <button class="colour-chip" data-colour="holiness"    style="background: #378ADD;" title="Holiness"></button>
+              <button class="colour-chip" data-colour="grace-light" style="background: #B5D4F4;" title="Grace Light"></button>
+            </div>
+          </div>
+        </aside>
+
+        <div class="shop-main">
+          <div class="shop-toolbar">
+            <p class="results-count" id="womenResultsCount">Showing all products</p>
+            <button class="btn btn-ghost filter-toggle-btn" id="womenFilterToggleBtn">
+              <i data-feather="sliders"></i> Filters
+            </button>
+          </div>
+          <div class="product-grid" id="womenProducts">
+            <!-- Injected by JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- END PAGE: WOMEN -->
+
+
+    <!-- =============================================
+         PAGE: ABOUT
+         ============================================= -->
+    <section class="page" id="page-about">
+      <div class="page-hero page-hero-lg about-hero">
+        <div class="container">
+          <p class="hero-eyebrow">The Movement</p>
+          <h1 class="page-title">You were called to something more.</h1>
+        </div>
+      </div>
+
+      <div class="container about-content">
+
+        <!-- 80%: Audience -->
+        <div class="about-section">
+          <h2 class="about-heading">You feel it, don't you?</h2>
+          <p class="about-body">
+            That tension between who you are in the kingdom and what the world tells you to wear.
+            Between the conviction you carry and the clothing that expresses it.
+            Between faith as a private matter and faith as a public declaration.
+          </p>
+          <p class="about-body">
+            You have tried the generic graphic tees with hollow inspirational quotes.
+            You have tried dressing down your faith so it does not make people uncomfortable.
+            You have settled for looking like everyone else because there was no alternative.
+          </p>
+          <p class="about-body">
+            That changes today.
+          </p>
+        </div>
+
+        <div class="about-section">
+          <h2 class="about-heading">Style is a spiritual act.</h2>
+          <p class="about-body">
+            Every morning, you make a choice about what to wear. NUEL Fashion
+            believes that choice is not neutral. It is a declaration of who you are,
+            what you carry, and where you belong.
+          </p>
+          <p class="about-body">
+            When you wear a NUEL piece, you are not just getting dressed.
+            You are showing up as yourself: kingdom-rooted, faith-forward,
+            and unapologetically beautiful.
+          </p>
+          <p class="about-body">
+            We design for the 25-year-old navigating Lagos with conviction.
+            For the student who wants to represent faith without looking
+            like a billboard. For the professional who believes excellence
+            and kingdom identity are not opposites.
+          </p>
+        </div>
+
+        <div class="about-values">
+          <div class="value-block">
+            <h3>Gentleness</h3>
+            <p>We do not shout. We speak quietly and clearly, through design that invites rather than demands attention.</p>
+          </div>
+          <div class="value-block">
+            <h3>Love</h3>
+            <p>Every product is made with care. For the person wearing it, for the community around them, for the message it carries.</p>
+          </div>
+          <div class="value-block">
+            <h3>Joy</h3>
+            <p>Faith is not heavy. NUEL Fashion celebrates identity with colour, form, and creative joy that makes you smile.</p>
+          </div>
+        </div>
+
+        <!-- 20%: Brand -->
+        <div class="about-section about-brand">
+          <h2 class="about-heading">About NUEL Fashion</h2>
+          <p class="about-body">
+            NUEL Fashion is a sub-brand of NUEL, a kingdom ecosystem that exists to equip,
+            inspire, and resource a generation of faith-forward creatives and leaders.
+          </p>
+          <p class="about-body">
+            Founded on three spirit pillars, Gentleness, Love, and Joy, NUEL Fashion
+            operates on a seasonal drop model. Four intentional releases per year.
+            Each drop has a theme, a story, and a limited run. When stock is gone, it is gone.
+          </p>
+          <p class="about-body">
+            Every piece is manufactured with sustainable intent, using premium 100% cotton
+            and organic canvas where possible. The Divine Blue palette, anchored in Deep Heaven
+            through Heavenly Mist, runs through every product as a visual signature.
+          </p>
+          <div class="about-university">
+            <h3>NUEL Fashion x NUEL University</h3>
+            <p>
+              NUEL Fashion feeds into NUEL University's Kingdom Creative Entrepreneur track.
+              Students learn brand identity, product development, drop marketing, and e-commerce
+              strategy using NUEL Fashion as the live case study.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+    <!-- END PAGE: ABOUT -->
+
+
+    <!-- =============================================
+         PAGE: COMMUNITY
+         ============================================= -->
+    <section class="page" id="page-community">
+      <div class="page-hero page-hero-sm">
+        <div class="container">
+          <h1 class="page-title">The Movement</h1>
+          <p class="page-subtitle">Real people. Real declarations. Real community.</p>
+        </div>
+      </div>
+
+      <div class="container community-content">
+
+        <!-- Lookbook Grid -->
+        <div class="lookbook-section">
+          <h2 class="section-heading">Lookbook</h2>
+          <div class="lookbook-grid" id="lookbookGrid">
+            <!-- Injected by JS -->
+          </div>
+        </div>
+
+        <!-- UGC Feed -->
+        <div class="ugc-section">
+          <h2 class="section-heading">Community Style</h2>
+          <p class="section-body">Tag us with <strong>#NUELFashion</strong> to be featured here.</p>
+          <div class="ugc-grid" id="ugcGrid">
+            <!-- Injected by JS -->
+          </div>
+        </div>
+
+        <!-- Events Section -->
+        <div class="events-section">
+          <h2 class="section-heading">Brand Events</h2>
+          <div class="events-list" id="eventsList">
+            <div class="event-card">
+              <div class="event-date">
+                <span class="event-month">OCT</span>
+                <span class="event-day">12</span>
+              </div>
+              <div class="event-info">
+                <h3 class="event-title">Harvest Drop Launch Event</h3>
+                <p class="event-location"><i data-feather="map-pin"></i> Lagos, Nigeria</p>
+                <p class="event-desc">Live launch of Drop 04, with in-person shopping, community worship, and brand activations.</p>
+              </div>
+            </div>
+            <div class="event-card">
+              <div class="event-date">
+                <span class="event-month">APR</span>
+                <span class="event-day">05</span>
+              </div>
+              <div class="event-info">
+                <h3 class="event-title">Peace Drop Market Pop-up</h3>
+                <p class="event-location"><i data-feather="map-pin"></i> Abuja, Nigeria</p>
+                <p class="event-desc">The Peace Drop arrives at a curated kingdom creative market. Meet the brand, try pieces in person.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+    <!-- END PAGE: COMMUNITY -->
+
+
+    <!-- =============================================
+         PAGE: CONTACT
+         ============================================= -->
+    <section class="page" id="page-contact">
+      <div class="page-hero page-hero-sm">
+        <div class="container">
+          <h1 class="page-title">Get in Touch</h1>
+          <p class="page-subtitle">We are here. Real humans, kingdom heart.</p>
+        </div>
+      </div>
+
+      <div class="container contact-content">
+        <div class="contact-grid">
+
+          <!-- Contact Form -->
+          <div class="contact-form-col">
+            <h2 class="contact-heading">Send us a message</h2>
+            <form class="contact-form" id="contactForm" onsubmit="handleContact(event)">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="contactName">Name</label>
+                  <input type="text" id="contactName" class="form-input" placeholder="Your name" required />
+                </div>
+                <div class="form-group">
+                  <label for="contactEmail">Email</label>
+                  <input type="email" id="contactEmail" class="form-input" placeholder="you@example.com" required />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="contactSubject">Subject</label>
+                <select id="contactSubject" class="form-input form-select">
+                  <option value="order">Order enquiry</option>
+                  <option value="returns">Returns and exchanges</option>
+                  <option value="collab">Collaboration</option>
+                  <option value="wholesale">Wholesale</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="contactMessage">Message</label>
+                <textarea id="contactMessage" class="form-input form-textarea" placeholder="How can we help?" rows="5" required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+          </div>
+
+          <!-- Contact Info + Live Agent -->
+          <div class="contact-info-col">
+            <div class="contact-info-card">
+              <h3>Support Details</h3>
+              <div class="contact-info-item">
+                <i data-feather="mail"></i>
+                <div>
+                  <span class="info-label">Email</span>
+                  <a href="mailto:hello@nuelfashion.com" class="info-value">hello@nuelfashion.com</a>
+                </div>
+              </div>
+              <div class="contact-info-item">
+                <i data-feather="clock"></i>
+                <div>
+                  <span class="info-label">Response Time</span>
+                  <span class="info-value">Within 24 hours</span>
+                </div>
+              </div>
+              <div class="contact-info-item">
+                <i data-feather="map-pin"></i>
+                <div>
+                  <span class="info-label">Location</span>
+                  <span class="info-value">Lagos, Nigeria</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Social Links -->
+            <div class="contact-info-card">
+              <h3>Follow the Movement</h3>
+              <div class="social-links">
+                <a href="#" class="social-link" aria-label="Instagram">
+                  <i data-feather="instagram"></i>
+                  <span>Instagram</span>
+                </a>
+                <a href="#" class="social-link" aria-label="TikTok">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.3 6.3 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.73a8.16 8.16 0 004.77 1.52V6.79a4.85 4.85 0 01-1-.1z"/></svg>
+                  <span>TikTok</span>
+                </a>
+                <a href="#" class="social-link" aria-label="Twitter / X">
+                  <i data-feather="twitter"></i>
+                  <span>Twitter</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Live Agent -->
+            <div class="contact-info-card live-agent-card">
+              <div class="agent-status">
+                <span class="status-dot"></span>
+                <span>Live support available</span>
+              </div>
+              <h3>Chat with us</h3>
+              <p>Get instant answers from our support team.</p>
+              <button class="btn btn-primary btn-full" id="liveChatBtn">Start Live Chat</button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="faq-section">
+          <h2 class="section-heading">Frequently Asked Questions</h2>
+          <div class="faq-list" id="faqList">
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false">
+                How does the drop model work?
+                <i data-feather="chevron-down"></i>
+              </button>
+              <div class="faq-answer">
+                <p>NUEL Fashion releases four drops per year, one per quarter. Each drop has a theme, a limited set of products, and a fixed run of units. When stock sells out, it does not return. We announce each drop 4-6 weeks in advance and open a waitlist before products go live.</p>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false">
+                What are the sizing options?
+                <i data-feather="chevron-down"></i>
+              </button>
+              <div class="faq-answer">
+                <p>NUEL Fashion uses an oversized, gender-neutral fit for tees and hoodies. We size from XS to XXL. Dress pieces for women follow a standard fit, available from XS to XL. A detailed size guide is available on each product page.</p>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false">
+                Do you ship outside Nigeria?
+                <i data-feather="chevron-down"></i>
+              </button>
+              <div class="faq-answer">
+                <p>Yes. The NUEL Fashion online store ships globally. International shipping costs are calculated at checkout. Delivery times vary by region: 3-5 days within Nigeria, 7-14 days internationally.</p>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false">
+                What is your returns policy?
+                <i data-feather="chevron-down"></i>
+              </button>
+              <div class="faq-answer">
+                <p>We accept returns and exchanges within 14 days of delivery for unworn items with tags intact. Sale and limited edition collaboration items are final sale. Contact hello@nuelfashion.com to initiate a return.</p>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false">
+                How does volume pricing work?
+                <i data-feather="chevron-down"></i>
+              </button>
+              <div class="faq-answer">
+                <p>Buy 1 item at the standard price. Buy 2-3 items and each item is automatically discounted by 10%. Buy 4 or more items and each item gets 20% off. Discounts apply to each item in your cart and are calculated automatically at checkout.</p>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false">
+                How do I pay?
+                <i data-feather="chevron-down"></i>
+              </button>
+              <div class="faq-answer">
+                <p>NUEL Fashion processes payments securely through Paystack. We accept cards, bank transfers, and USSD payments. Your card details are never stored on our servers.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+    <!-- END PAGE: CONTACT -->
+
+  </main>
+
+  <!-- ===================================================
+       FOOTER
+       =================================================== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <div class="logo">
+          <span class="logo-mark">N</span>
+          <div class="logo-text">
+            <span class="logo-brand">NUEL Fashion</span>
+            <span class="logo-sub">Part of the NUEL Ecosystem</span>
+          </div>
+        </div>
+        <p class="footer-tagline">What you wear is a declaration. Make it count.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Shop</h4>
+          <a href="#" onclick="navigateTo('men')">Men's Collection</a>
+          <a href="#" onclick="navigateTo('women')">Women's Collection</a>
+          <a href="#" onclick="navigateTo('community')">Lookbook</a>
+        </div>
+        <div class="footer-col">
+          <h4>Brand</h4>
+          <a href="#" onclick="navigateTo('about')">About NUEL Fashion</a>
+          <a href="#" onclick="navigateTo('community')">Community</a>
+          <a href="#" onclick="navigateTo('contact')">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <a href="#" onclick="navigateTo('contact')">FAQ</a>
+          <a href="#">Shipping Policy</a>
+          <a href="#">Returns</a>
+          <a href="#">Size Guide</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>&copy; 2025 NUEL Fashion. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================================================
+       CHECKOUT MODAL (Paystack Hook)
+       =================================================== -->
+  <div class="modal modal-wide" id="checkoutModal" aria-hidden="true" role="dialog">
+    <div class="modal-box modal-box-wide">
+      <button class="modal-close" id="checkoutClose" aria-label="Close checkout">
+        <i data-feather="x"></i>
+      </button>
+      <div class="checkout-inner">
+        <div class="checkout-left">
+          <h2 class="modal-heading">Complete Your Order</h2>
+
+          <div class="checkout-step" id="checkoutStep1">
+            <h3 class="step-title">Your Information</h3>
+            <div class="form-row">
+              <div class="form-group">
+                <label>First Name</label>
+                <input type="text" id="checkoutFirstName" class="form-input" placeholder="First name" />
+              </div>
+              <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" id="checkoutLastName" class="form-input" placeholder="Last name" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" id="checkoutEmail" class="form-input" placeholder="your@email.com" />
+            </div>
+            <div class="form-group">
+              <label>Phone</label>
+              <input type="tel" id="checkoutPhone" class="form-input" placeholder="+234 800 000 0000" />
+            </div>
+            <div class="form-group">
+              <label>Delivery Address</label>
+              <textarea id="checkoutAddress" class="form-input form-textarea" rows="3" placeholder="Full delivery address"></textarea>
+            </div>
+            <button class="btn btn-primary btn-full" id="proceedToPayBtn">
+              Continue to Payment
+              <i data-feather="arrow-right"></i>
+            </button>
+          </div>
+
+          <div class="checkout-step" id="checkoutStep2" style="display:none">
+            <h3 class="step-title">Payment</h3>
+            <div class="payment-method">
+              <div class="payment-option selected">
+                <i data-feather="credit-card"></i>
+                <span>Card / Bank Transfer</span>
+                <span class="payment-powered">via Paystack</span>
+              </div>
+            </div>
+            <p class="payment-note">
+              You will be redirected to Paystack's secure payment page to complete your transaction.
+            </p>
+            <button class="btn btn-primary btn-full" id="paystackPayBtn">
+              <i data-feather="lock"></i>
+              Pay Securely Now
+            </button>
+            <button class="btn btn-ghost btn-full" id="backToInfoBtn">Back to Information</button>
+          </div>
+
+        </div>
+        <div class="checkout-right">
+          <h3 class="checkout-order-title">Order Summary</h3>
+          <div id="checkoutOrderItems"></div>
+          <div class="checkout-totals">
+            <div class="summary-row">
+              <span>Subtotal</span>
+              <span id="checkoutSubtotal"></span>
+            </div>
+            <div class="summary-row" id="checkoutDiscountRow" style="display:none">
+              <span>Volume Discount</span>
+              <span id="checkoutDiscount" class="discount-value"></span>
+            </div>
+            <div class="summary-row">
+              <span>Shipping</span>
+              <span>Calculated at delivery</span>
+            </div>
+            <div class="summary-row summary-total">
+              <span>Total</span>
+              <span id="checkoutTotal"></span>
+            </div>
+          </div>
+          <div class="secure-badges">
+            <span><i data-feather="shield"></i> SSL Secured</span>
+            <span><i data-feather="lock"></i> Paystack Protected</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main JavaScript -->
+  <script src="app.js"></script>
+
+</body>
+</html>
