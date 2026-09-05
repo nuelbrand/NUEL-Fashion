@@ -1426,12 +1426,7 @@ const Checkout = {
     if (discountRow) discountRow.style.display = t.discount > 0 ? 'flex' : 'none';
     if (discountEl && t.discount > 0) discountEl.textContent = '-' + Currency.format(t.discount);
   },
-
-  /**
-   * Initiate Paystack payment.
-   * Replace this stub with real Paystack Popup.js integration.
-   * Docs: https://paystack.com/docs/payments/accept-payments/
-   */
+   
   initiatePaystack() {
     const email = document.getElementById('checkoutEmail')?.value;
     const t = Cart.totals();
@@ -1442,13 +1437,6 @@ const Checkout = {
       return;
     }
 
-    /* 
-      REAL PAYSTACK INTEGRATION:
-      =========================================================
-      Load Paystack's inline JS:
-      <script src="https://js.paystack.co/v1/inline.js"></script>
-      
-      Then call:
       const handler = PaystackPop.setup({
         key:     CONFIG.PAYSTACK.publicKey,
         email:   email,
@@ -1467,16 +1455,7 @@ const Checkout = {
         }
       });
       handler.openIframe();
-      =========================================================
-    */
-
-    Toast.show('Connecting to Paystack... (configure API key to go live)');
-    console.log('PAYSTACK PAYLOAD:', {
-      email,
-      amount: t.total * 100,
-      currency: 'NGN',
-      cartItems: State.cart,
-    });
+   
   },
 
   clear() {
