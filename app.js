@@ -49,7 +49,7 @@ const CONFIG = {
 
   // Paystack configuration : replace with real public key
   PAYSTACK: {
-    publicKey: 'YOUR_PAYSTACK_PUBLIC_KEY',
+    publicKey: 'pk_test_eae4dd45061572a16d1bb6c3bfa1a29b3eed01cf',
     currency:  'NGN',
   },
 
