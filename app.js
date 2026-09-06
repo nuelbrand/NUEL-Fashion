@@ -1692,9 +1692,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }, 500);
 
   console.log('%c NUEL Fashion : Production Build Ready ', 'background:#185FA5;color:#fff;padding:4px 10px;border-radius:4px;font-weight:bold;');
-  console.log('Supabase URL:    ', CONFIG.SUPABASE.url);
-  console.log('Paystack Key:    ', CONFIG.PAYSTACK.publicKey);
-  console.log('To go live: replace CONFIG values and uncomment real API calls.');
+  
 });
 
 /* =====================================================================
