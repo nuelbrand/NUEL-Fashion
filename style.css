@@ -1375,6 +1375,8 @@ ul, ol { list-style: none; }
 .hero-visual {
   display: flex;
   justify-content: center;
+  overflow: visible;
+  min-width: 0;
 }
 
 
@@ -1382,6 +1384,7 @@ ul, ol { list-style: none; }
   position: relative;
   width: 100%;
   max-width: 340px;
+  overflow: visible;
 }
 
 
@@ -1414,7 +1417,7 @@ ul, ol { list-style: none; }
 
 .hero-badge-1 {
   top: -14px;
-  left: -20px;
+  left: 8px;
   display: flex;
   flex-direction: column;
 }
@@ -1436,7 +1439,7 @@ ul, ol { list-style: none; }
 
 .hero-badge-2 {
   bottom: 20px;
-  right: -18px;
+  right: 12px;
   font-weight: 600;
   color: var(--text-primary);
 }
@@ -1454,9 +1457,29 @@ ul, ol { list-style: none; }
 .hero-scroll-cue svg { width: 22px; height: 22px; }
 
 
+/* Prevent hero children from causing horizontal scrollbar flicker */
+.hero,
+.hero-inner,
+.hero-visual,
+.hero-image-frame,
+.hero-copy {
+  min-width: 0;
+}
+
+
 @keyframes bounceDown {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(6px); }
+}
+
+
+/* Prevent hero badges and decorative elements from causing horizontal scroll */
+.hero,
+.hero-inner,
+.hero-visual,
+.hero-image-frame,
+.hero-copy {
+  min-width: 0;
 }
 
 
