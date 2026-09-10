@@ -1,0 +1,29 @@
+# ============================================================
+# .gitignore — Files Git will NEVER upload to GitHub
+# ============================================================
+
+# ─── ENVIRONMENT VARIABLES (contains secret keys) ───────────
+.env
+.env.local
+.env.production
+
+# ─── BUILD OUTPUT (Cloudflare builds this itself) ────────────
+dist/
+
+# ─── NODE MODULES (Cloudflare installs these itself) ─────────
+node_modules/
+
+# ─── EDITOR FILES ────────────────────────────────────────────
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# ─── OS FILES ────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ─── VITE CACHE ──────────────────────────────────────────────
+.vite/
