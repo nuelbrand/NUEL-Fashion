@@ -51,7 +51,7 @@ export default function HomePage() {
       {/* ══════════════════════════════════════════════════════
           1. HERO
       ══════════════════════════════════════════════════════ */}
-      <section className="relative min-h-[calc(100vh-68px)] flex flex-col bg-white dark:bg-gray-950 overflow-hidden">
+      <section className="relative md:min-h-[calc(100vh-68px)] flex flex-col bg-white dark:bg-gray-950 overflow-hidden">
 
         {/* Background gradient */}
         <div className="absolute inset-0 pointer-events-none">
@@ -59,7 +59,7 @@ export default function HomePage() {
           <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-holiness/5 rounded-full translate-y-1/4 -translate-x-1/4" />
         </div>
 
-        <div className="flex-1 max-w-[1240px] mx-auto px-4 md:px-8 grid grid-cols-1 md:grid-cols-2 gap-8 items-center py-16 w-full">
+        <div className="flex-1 max-w-[1240px] mx-auto px-4 md:px-8 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-center py-8 md:py-16 w-full">
 
           {/* Copy */}
           <div>
