@@ -1,0 +1,25 @@
+# ============================================================
+# CLOUDFLARE PAGES CONFIGURATION
+# FILE: _redirects
+#
+# WHY THIS FILE EXISTS:
+#   React Router handles navigation in the browser.
+#   But when you visit /men or /product/tee-001 directly
+#   (or refresh the page), Cloudflare tries to find an
+#   actual file at that path — which doesn't exist.
+#
+#   This file tells Cloudflare: "For ANY URL that doesn't
+#   match a real file, serve index.html instead."
+#   Then React Router reads the URL and shows the right page.
+#
+#   WITHOUT this file: refreshing any page except /
+#   would give a 404 error from Cloudflare.
+#   WITH this file:    every URL works correctly.
+#
+# HOW TO USE:
+#   Place this file in your project's /public/ folder.
+#   Cloudflare Pages automatically reads it after deployment.
+# ============================================================
+
+# Redirect all requests to index.html (React handles routing)
+/*    /index.html   200

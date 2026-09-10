@@ -1,0 +1,190 @@
+/**
+ * GLOBAL STYLESHEET
+ * =================
+ * FILE: src/styles/index.css
+ *
+ * WHAT THIS FILE DOES:
+ *   1. Loads all Tailwind CSS utility classes
+ *   2. Defines any custom styles that Tailwind can't do with
+ *      utility classes alone (like font-face imports via Google Fonts,
+ *      or complex animations that need custom keyframes)
+ *
+ * STRUCTURE:
+ *   @tailwind base      → Tailwind's CSS reset (like normalize.css)
+ *   @tailwind components → Tailwind's reusable component classes
+ *   @tailwind utilities  → All the utility classes (bg-blue-500, etc.)
+ *
+ *   Then our custom additions below.
+ */
+
+/* ── GOOGLE FONTS ────────────────────────────────────────────────────────── */
+/* @import must come before all other statements — CSS rule */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap');
+
+/* ── TAILWIND DIRECTIVES ─────────────────────────────────────────────────── */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── BASE LAYER OVERRIDES ────────────────────────────────────────────────── */
+@layer base {
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    overflow-x: hidden;
+  }
+
+  /* Default body font */
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    line-height: 1.65;
+    overflow-x: hidden;
+    /* Prevent layout shift when scrollbar appears */
+    scrollbar-gutter: stable;
+  }
+
+  /* Remove default anchor underlines */
+  a {
+    text-decoration: none;
+  }
+
+  /* Make images block-level by default */
+  img, svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  /* Remove default button styles */
+  button {
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-family: inherit;
+  }
+
+  /* Remove list styles */
+  ul, ol {
+    list-style: none;
+  }
+
+  /* Reduce motion for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* Custom scrollbar styling (subtle, brand-consistent) */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #B5D4F4;
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #185FA5;
+  }
+}
+
+/* ── COMPONENT LAYER (reusable patterns) ─────────────────────────────────── */
+@layer components {
+
+  /* Font display helper */
+  .font-display {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+
+  /* Focus ring used by all interactive elements */
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-covenant focus-visible:ring-offset-2;
+  }
+
+  /* Range slider (price filter) - cross-browser */
+  input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    border-radius: 9999px;
+    background: #E6F1FB;
+    outline: none;
+    cursor: pointer;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #185FA5;
+    cursor: pointer;
+    border: 2px solid white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #185FA5;
+    cursor: pointer;
+    border: 2px solid white;
+  }
+}
+
+/* ── UTILITIES LAYER (custom utilities) ──────────────────────────────────── */
+@layer utilities {
+
+  /* Shimmer animation for skeleton loading */
+  .animate-shimmer {
+    background: linear-gradient(
+      90deg,
+      theme('colors.gray.100') 25%,
+      theme('colors.gray.50') 50%,
+      theme('colors.gray.100') 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  .dark .animate-shimmer {
+    background: linear-gradient(
+      90deg,
+      theme('colors.gray.800') 25%,
+      theme('colors.gray.700') 50%,
+      theme('colors.gray.800') 75%
+    );
+    background-size: 200% 100%;
+  }
+
+  /* Screen reader only (accessibility) */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  /* Page entry transition */
+  .page-enter {
+    animation: fade-in 0.3s ease forwards;
+  }
+}
+
+/* ── PRINT STYLES ────────────────────────────────────────────────────────── */
+@media print {
+  header, footer, .drawer, .modal, .overlay, .toast {
+    display: none !important;
+  }
+}
