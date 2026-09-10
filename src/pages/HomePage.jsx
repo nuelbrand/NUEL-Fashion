@@ -51,7 +51,7 @@ export default function HomePage() {
       {/* ══════════════════════════════════════════════════════
           1. HERO
       ══════════════════════════════════════════════════════ */}
-      <section className="relative md:min-h-[calc(100vh-68px)] flex flex-col bg-white dark:bg-gray-950 overflow-hidden">
+      <section className="relative min-h-[calc(100vh-68px)] flex flex-col bg-white dark:bg-gray-950 overflow-hidden">
 
         {/* Background gradient */}
         <div className="absolute inset-0 pointer-events-none">
