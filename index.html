@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ── SEO META TAGS ──────────────────────────────────────────────── -->
+  <meta name="description" content="NUEL Fashion: What you wear is a declaration. Kingdom-first clothing, accessories, and lifestyle products rooted in faith and identity." />
+  <meta name="theme-color" content="#185FA5" />
+
+  <!-- Open Graph (for link previews on WhatsApp, Facebook, etc.) -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content="NUEL Fashion — What You Wear Is A Declaration" />
+  <meta property="og:description" content="Kingdom-first clothing, accessories, and lifestyle products rooted in faith and identity." />
+  <meta property="og:site_name"   content="NUEL Fashion" />
+
+  <!-- Twitter card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="NUEL Fashion" />
+  <meta name="twitter:description" content="What you wear is a declaration." />
+
+  <!-- ── FAVICON ────────────────────────────────────────────────────── -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/x-icon"  href="/favicon.ico" />
+
+  <!-- ── PAGE TITLE ─────────────────────────────────────────────────── -->
+  <!-- React updates this per-page via document.title in each page component -->
+  <title>NUEL Fashion — What You Wear Is A Declaration</title>
+
+  <!-- ── FONT PRECONNECT (improves load speed) ─────────────────────── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- ── PAYSTACK INLINE SCRIPT ────────────────────────────────────── -->
+  <!--
+    This MUST be loaded before our app JS so that
+    window.PaystackPop is available when CheckoutModal runs.
+    Paystack handles all payment processing securely.
+  -->
+  <script src="https://js.paystack.co/v1/inline.js"></script>
+</head>
+
+<body>
+  <!--
+    ── ROOT MOUNT POINT ──────────────────────────────────────────────
+    React renders the entire app into this single <div>.
+    You should NOT put any visible content here — React controls it.
+    The id="root" matches what src/main.jsx looks for.
+  -->
+  <div id="root"></div>
+
+  <!--
+    ── MAIN APP SCRIPT ───────────────────────────────────────────────
+    Vite injects the compiled React app here during build.
+    type="module" enables modern JavaScript module loading.
+  -->
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+</html>
